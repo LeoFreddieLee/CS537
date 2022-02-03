@@ -35,7 +35,7 @@ int main(int argc, char *argv[]){
 	dst = argv[argc-1];
 	FILE *fp = fopen(dict, "r");
 	if(fp == NULL){
-		printf("cannot open file\n");
+		printf("my-look: cannot open file\n");
 		exit(1);
 	}
 	char buffer[100];
