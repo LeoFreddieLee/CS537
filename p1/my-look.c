@@ -41,7 +41,7 @@ int main(int argc, char *argv[]){
 	char buffer[100];
 	while(fgets(buffer,100,fp)){
 		if(strncasecmp(buffer,dst,strlen(dst))==0){
-			printf("%s\n",buffer);
+			printf("%s",buffer);
 		}
 	}
 	fclose(fp);
