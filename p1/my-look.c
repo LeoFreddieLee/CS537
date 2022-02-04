@@ -26,32 +26,32 @@ int main(int argc, char *argv[]) {
         dict = optarg;
         break;
       case '?':
-        printf("my-look:invalid command line\n");
+        printf("my-look: invalid command line\n");
         exit(1);
     }
   }
-  if (dict == NULL) {
-    dict = malloc(100);
-    if (fgets(dict, 100, stdin) == NULL) {
-      printf("failed to read input");
-      exit(0);
-    }
-    dict[strlen(dict)-1] = 0;  // omit the \n caused by fgets in the end of dict
-  }
-
   dst = argv[argc-1];
-  FILE *fp = fopen(dict, "r");
-  if (fp == NULL) {
-    printf("my-look: cannot open file\n");
-    exit(1);
-  }
-  char buffer[100];
-  while (fgets(buffer, 100, fp)) {
-    if (strncasecmp(buffer, dst, strlen(dst)) == 0) {
-      printf("%s", buffer);
+  if (dict == NULL) {
+    char input[100];
+    while (fgets(input, 100, stdin) != NULL) {
+      if (strncasecmp(input, dst, strlen(dst)) == 0) {
+        printf("%s", input);
+      }
     }
+  } else {
+    FILE *fp = fopen(dict, "r");
+    if (fp == NULL) {
+      printf("my-look: cannot open file\n");
+      exit(1);
+    }
+    char buffer[100];
+    while (fgets(buffer, 100, fp)) {
+      printf("%s's length is %zu\n", buffer, strlen(buffer));
+      if (strncasecmp(buffer, dst, strlen(dst)) == 0) {
+        printf("%s", buffer);
+      }
+    }
+    fclose(fp);
   }
-  fclose(fp);
-
   return 0;
 }
