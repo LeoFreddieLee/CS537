@@ -30,6 +30,10 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
   }
+  if (argc == 1 || argv[argc-1] == NULL) {
+    printf("my-look: invalid command line\n");
+    exit(1);
+  }
   dst = argv[argc-1];
   if (dict == NULL) {
     char input[100];
@@ -46,7 +50,6 @@ int main(int argc, char *argv[]) {
     }
     char buffer[100];
     while (fgets(buffer, 100, fp)) {
-      printf("%s's length is %zu\n", buffer, strlen(buffer));
       if (strncasecmp(buffer, dst, strlen(dst)) == 0) {
         printf("%s", buffer);
       }
