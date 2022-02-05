@@ -37,10 +37,21 @@ int main(int argc, char *argv[]) {
   dst = argv[argc-1];
   if (dict == NULL) {
     char input[100];
-    while (fgets(input, 100, stdin) != NULL) {
-      if (strncasecmp(input, dst, strlen(dst)) == 0) {
+    while (fgets(input, 100, stdin)) {
+      char *tmp = malloc(100);
+      int j = 0;
+      for (int i = 0; i < strlen(input); i++) {
+        if ((input[i] >= 48 && input[i] <= 57) ||
+          (input[i] >= 65 && input[i] <= 90) ||
+          (input[i] >= 97 && input[i] <= 122)) {
+          tmp[j] = input[i];
+          j++;
+          }
+      }
+      if (strncasecmp(tmp, dst, strlen(dst)) == 0) {
         printf("%s", input);
       }
+      free(tmp);
     }
   } else {
     FILE *fp = fopen(dict, "r");
@@ -50,9 +61,20 @@ int main(int argc, char *argv[]) {
     }
     char buffer[100];
     while (fgets(buffer, 100, fp)) {
-      if (strncasecmp(buffer, dst, strlen(dst)) == 0) {
+      char *tmp = malloc(100);
+      int j = 0;
+      for (int i = 0; i < strlen(buffer); i++) {
+        if ((buffer[i] >= 48 && buffer[i] <= 57)
+          || (buffer[i] >= 65 && buffer[i] <= 90) ||
+          (buffer[i] >= 97 && buffer[i] <= 122)) {
+          tmp[j] = buffer[i];
+          j++;
+          }
+        }
+      if (strncasecmp(tmp, dst, strlen(dst)) == 0) {
         printf("%s", buffer);
       }
+      free(tmp);
     }
     fclose(fp);
   }
