@@ -36,9 +36,9 @@ int main(int argc, char *argv[]) {
   }
   dst = argv[argc-1];
   if (dict == NULL) {
-    char input[100];
-    while (fgets(input, 100, stdin)) {
-      char *tmp = malloc(100);
+    char input[10000];
+    while (fgets(input, 10000, stdin)) {
+      char *tmp = malloc(10000);
       int j = 0;
       for (int i = 0; i < strlen(input); i++) {
         if ((input[i] >= 48 && input[i] <= 57) ||
@@ -59,9 +59,9 @@ int main(int argc, char *argv[]) {
       printf("my-look: cannot open file\n");
       exit(1);
     }
-    char buffer[100];
-    while (fgets(buffer, 100, fp)) {
-      char *tmp = malloc(100);
+    char buffer[10000];
+    while (fgets(buffer, 10000, fp)) {
+      char *tmp = malloc(10000);
       int j = 0;
       for (int i = 0; i < strlen(buffer); i++) {
         if ((buffer[i] >= 48 && buffer[i] <= 57)
